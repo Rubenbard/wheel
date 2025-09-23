@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wheel of Life</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Wheel of Life</h1>
+        <p>Rate each area from 0 to 10, then generate your wheel.</p>
+      </header>
+
+      <section class="card">
+        <form id="wheel-form">
+          <div class="grid">
+            <div class="field">
+              <label for="q1">Health</label>
+              <input id="q1" name="Health" type="range" min="0" max="10" value="5" />
+              <div class="value" data-for="q1">5</div>
+            </div>
+            <div class="field">
+              <label for="q2">Career</label>
+              <input id="q2" name="Career" type="range" min="0" max="10" value="5" />
+              <div class="value" data-for="q2">5</div>
+            </div>
+            <div class="field">
+              <label for="q3">Finances</label>
+              <input id="q3" name="Finances" type="range" min="0" max="10" value="5" />
+              <div class="value" data-for="q3">5</div>
+            </div>
+            <div class="field">
+              <label for="q4">Relationships</label>
+              <input id="q4" name="Relationships" type="range" min="0" max="10" value="5" />
+              <div class="value" data-for="q4">5</div>
+            </div>
+            <div class="field">
+              <label for="q5">Personal Growth</label>
+              <input id="q5" name="Personal Growth" type="range" min="0" max="10" value="5" />
+              <div class="value" data-for="q5">5</div>
+            </div>
+            <div class="field">
+              <label for="q6">Fun & Recreation</label>
+              <input id="q6" name="Fun & Recreation" type="range" min="0" max="10" value="5" />
+              <div class="value" data-for="q6">5</div>
+            </div>
+            <div class="field">
+              <label for="q7">Environment</label>
+              <input id="q7" name="Environment" type="range" min="0" max="10" value="5" />
+              <div class="value" data-for="q7">5</div>
+            </div>
+            <div class="field">
+              <label for="q8">Spirituality</label>
+              <input id="q8" name="Spirituality" type="range" min="0" max="10" value="5" />
+              <div class="value" data-for="q8">5</div>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="submit" class="primary">Generate Wheel</button>
+            <button type="button" id="reset-btn" class="ghost">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card chart-card" hidden id="chart-section">
+        <canvas id="wheelChart" width="600" height="600" aria-label="Wheel of Life" role="img"></canvas>
+      </section>
+
+      <footer>
+        <p>
+          Built with <a href="https://www.chartjs.org/" target="_blank" rel="noreferrer">Chart.js</a>
+        </p>
+      </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" integrity="sha384-5HjC9vG+fVdYh0wzN7q3t4xv8gJYch8rUXe1fPpS1kzBzZ0ogx4JZKk0M3O2sXv7" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
