@@ -16,55 +16,28 @@
         <p>Rate each area from 0 to 10, then generate your wheel.</p>
       </header>
 
-      <section class="card">
-        <form id="wheel-form">
-          <div class="grid">
-            <div class="field">
-              <label for="q1">Work & career</label>
-              <input id="q1" name="Work & career" type="range" min="0" max="10" value="5" />
-              <div class="value" data-for="q1">5</div>
-            </div>
-            <div class="field">
-              <label for="q2">FInances</label>
-              <input id="q2" name="FInances" type="range" min="0" max="10" value="5" />
-              <div class="value" data-for="q2">5</div>
-            </div>
-            <div class="field">
-              <label for="q3">Health</label>
-              <input id="q3" name="Health" type="range" min="0" max="10" value="5" />
-              <div class="value" data-for="q3">5</div>
-            </div>
-            <div class="field">
-              <label for="q4">Family & friends</label>
-              <input id="q4" name="Family & friends" type="range" min="0" max="10" value="5" />
-              <div class="value" data-for="q4">5</div>
-            </div>
-            <div class="field">
-              <label for="q5">Love & romance</label>
-              <input id="q5" name="Love & romance" type="range" min="0" max="10" value="5" />
-              <div class="value" data-for="q5">5</div>
-            </div>
-            <div class="field">
-              <label for="q6">Personal growth & development</label>
-              <input id="q6" name="Personal growth & development" type="range" min="0" max="10" value="5" />
-              <div class="value" data-for="q6">5</div>
-            </div>
-            <div class="field">
-              <label for="q7">Relaxation & fun</label>
-              <input id="q7" name="Relaxation & fun" type="range" min="0" max="10" value="5" />
-              <div class="value" data-for="q7">5</div>
-            </div>
-            <div class="field">
-              <label for="q8">Social contribution</label>
-              <input id="q8" name="Social contribution" type="range" min="0" max="10" value="5" />
-              <div class="value" data-for="q8">5</div>
-            </div>
+      <section class="card" id="wizard">
+        <div class="wizard-header">
+          <div id="progress">Step <span id="step-num">1</span> of <span id="step-total">8</span></div>
+          <h2 id="category-title">Work & career</h2>
+          <p id="category-subtitle" class="subtitle"></p>
+        </div>
+
+        <div class="scale">
+          <div class="scale-labels">
+            <span>0</span>
+            <span>10</span>
           </div>
-          <div class="actions">
-            <button type="submit" class="primary">Generate Wheel</button>
-            <button type="button" id="reset-btn" class="ghost">Reset</button>
-          </div>
-        </form>
+          <div class="scale-grid" id="scale-grid" role="radiogroup" aria-label="Rating from 0 to 10"></div>
+        </div>
+
+        <div class="actions wizard-actions">
+          <button type="button" id="back-btn" class="ghost" disabled>Back</button>
+          <div class="spacer"></div>
+          <button type="button" id="next-btn" class="primary">Next</button>
+          <button type="button" id="submit-btn" class="primary" hidden>Generate Wheel</button>
+          <button type="button" id="reset-btn" class="ghost">Reset</button>
+        </div>
       </section>
 
       <section class="card chart-card" hidden id="chart-section">

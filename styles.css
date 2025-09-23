@@ -136,4 +136,29 @@ footer { text-align: center; color: var(--muted); margin-top: 22px; }
 footer a { color: var(--accent); text-decoration: none; }
 footer a:hover { text-decoration: underline; }
 
+/* Wizard */
+.wizard-header { text-align: center; margin-bottom: 12px; }
+#progress { color: var(--muted); font-size: 13px; margin-bottom: 6px; }
+.subtitle { color: var(--muted); margin: 6px auto 0; max-width: 900px; line-height: 1.5; }
+
+.scale { margin-top: 16px; }
+.scale-labels { display: flex; justify-content: space-between; color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+.scale-grid { display: grid; grid-template-columns: repeat(11, 1fr); gap: 8px; }
+
+.scale-btn {
+  appearance: none;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 10px 0;
+  text-align: center;
+  cursor: pointer;
+}
+.scale-btn[aria-checked="true"],
+.scale-btn:hover { border-color: transparent; background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #0a122a; font-weight: 600; }
+
+.wizard-actions { display: flex; align-items: center; margin-top: 16px; }
+.wizard-actions .spacer { flex: 1; }
+
 
