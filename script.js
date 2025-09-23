@@ -75,6 +75,20 @@ function renderScale(selected) {
       renderScale(i);
       nextBtn.disabled = false;
       submitBtn.disabled = false;
+      // Auto-generate chart when the last step is answered
+      const isLast = wizardState.currentIndex === categories.length - 1;
+      if (isLast) {
+        const labels = categories.map((c) => c.label);
+        const values = wizardState.values.slice();
+        chartSection.hidden = false;
+        try {
+          renderChart(labels, values);
+          window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        } catch (err) {
+          console.error('Chart render error', err);
+          alert('Unable to render chart. Please refresh and try again.');
+        }
+      }
     });
     scaleGridEl.appendChild(btn);
   }
@@ -124,9 +138,7 @@ function renderChart(labels, values) {
       ]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      aspectRatio: 1,
+      responsive: false,
       scales: {
         r: {
           min: 0,
@@ -173,8 +185,13 @@ submitBtn.addEventListener('click', () => {
   const labels = categories.map((c) => c.label);
   const values = wizardState.values.slice();
   chartSection.hidden = false;
-  renderChart(labels, values);
-  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  try {
+    renderChart(labels, values);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  } catch (err) {
+    console.error('Chart render error', err);
+    alert('Unable to render chart. Please refresh and try again.');
+  }
 });
 
 resetBtn.addEventListener('click', () => {
