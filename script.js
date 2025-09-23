@@ -310,24 +310,36 @@ async function sendToCoach() {
   const values = wizardState.values.slice();
   if (values.some((v) => v == null)) { alert('Please complete all steps first.'); return; }
   const chartBase64 = chartInstance ? chartInstance.canvas.toDataURL('image/png') : null;
-  const payload = {
-    clientEmail: (coachEmailInput && coachEmailInput.value) || undefined,
-    clientName: undefined,
-    categories: labels,
-    values,
-    chartBase64
-  };
   try {
-    const res = await fetch('http://localhost:3001/api/submissions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+    const supabaseUrl = 'https://dspekkajcbdwpylneqgq.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzcGVra2FqY2Jkd3B5bG5lcWdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg2MjY3NzUsImV4cCI6MjA3NDIwMjc3NX0.W0wkI0ZJfTD94cL2s282AbK3AVXbAfMe4yIG6xpaTck';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    // Ensure storage bucket exists (one-time in dashboard ideally). We'll assume `charts` exists.
+    let chartUrl = null;
+    if (chartBase64) {
+      const { data: uploadData, error: uploadError } = await supabase.storage.from('charts').upload(
+        `charts/${Date.now()}.png`,
+        chartBase64.split(',')[1],
+        { contentType: 'image/png', upsert: true }
+      );
+      if (uploadError) throw uploadError;
+      const { data: publicUrl } = supabase.storage.from('charts').getPublicUrl(uploadData.path);
+      chartUrl = publicUrl.publicUrl;
+    }
+
+    const { error: insertError } = await supabase.from('submissions').insert({
+      client_name: null,
+      client_email: (coachEmailInput && coachEmailInput.value) || null,
+      categories: labels,
+      values,
+      chart_url: chartUrl
     });
-    if (!res.ok) throw new Error('Failed to send');
-    alert('Sent to coach');
+    if (insertError) throw insertError;
+    alert('Saved to Supabase');
   } catch (e) {
     console.error(e);
-    alert('Could not send to coach. Ensure the backend is running.');
+    alert('Could not save to Supabase. Please check configuration.');
   }
 }
 if (sendBtn) sendBtn.addEventListener('click', sendToCoach);

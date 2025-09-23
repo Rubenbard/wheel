@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wheel of Life Admin</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Admin - Submissions</h1>
+      <div class="card" style="margin-top:12px;">
+        <div class="actions" style="margin-bottom:12px;">
+          <input id="admin-key" placeholder="Admin API Key" style="flex:1; min-width:220px; padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px;" />
+          <button id="load-submissions" class="primary">Load</button>
+        </div>
+        <div id="results"></div>
+      </div>
+    </main>
+    <script>
+      document.getElementById('load-submissions').addEventListener('click', async () => {
+        const key = document.getElementById('admin-key').value.trim();
+        if (!key) { alert('Enter admin key'); return; }
+        const res = await fetch('http://localhost:3001/api/submissions', { headers: { 'x-admin-key': key } });
+        if (!res.ok) { alert('Unauthorized or server error'); return; }
+        const rows = await res.json();
+        const el = document.getElementById('results');
+        el.innerHTML = '';
+        rows.forEach((r) => {
+          const div = document.createElement('div');
+          div.className = 'field';
+          const labels = r.categories.join(', ');
+          const scores = r.values.join(', ');
+          div.innerHTML = `<strong>${r.createdAt}</strong><br/>Client: ${r.clientName || '-'} (${r.clientEmail || '-'})<br/>Scores: ${scores}`;
+          el.appendChild(div);
+        });
+      });
+    </script>
+  </body>
+  </html>
+
+
