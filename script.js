@@ -256,6 +256,8 @@ renderStep();
 // Download buttons
 const downloadPngBtn = document.getElementById('download-png');
 const downloadPdfBtn = document.getElementById('download-pdf');
+const coachEmailInputId = 'coach-email-input';
+const sendBtnId = 'send-to-coach';
 
 function downloadPNG() {
   if (!chartInstance) return;
@@ -299,5 +301,35 @@ function downloadPDF() {
 
 if (downloadPngBtn) downloadPngBtn.addEventListener('click', downloadPNG);
 if (downloadPdfBtn) downloadPdfBtn.addEventListener('click', downloadPDF);
+
+// Send to coach (backend integration)
+const sendBtn = document.getElementById(sendBtnId);
+const coachEmailInput = document.getElementById(coachEmailInputId);
+async function sendToCoach() {
+  const labels = categories.map((c) => c.label);
+  const values = wizardState.values.slice();
+  if (values.some((v) => v == null)) { alert('Please complete all steps first.'); return; }
+  const chartBase64 = chartInstance ? chartInstance.canvas.toDataURL('image/png') : null;
+  const payload = {
+    clientEmail: (coachEmailInput && coachEmailInput.value) || undefined,
+    clientName: undefined,
+    categories: labels,
+    values,
+    chartBase64
+  };
+  try {
+    const res = await fetch('http://localhost:3001/api/submissions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error('Failed to send');
+    alert('Sent to coach');
+  } catch (e) {
+    console.error(e);
+    alert('Could not send to coach. Ensure the backend is running.');
+  }
+}
+if (sendBtn) sendBtn.addEventListener('click', sendToCoach);
 
 
