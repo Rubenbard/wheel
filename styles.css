@@ -1,11 +1,11 @@
 :root {
-  --bg: #0b1020;
-  --card: #121935;
-  --text: #ecf0ff;
-  --muted: #9aa3c7;
-  --accent: #6ea8fe;
-  --accent-2: #b06efc;
-  --ring: #2c3e7a;
+  --bg: #f7f9fc;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --accent: #2563eb;
+  --accent-2: #7c3aed;
+  --ring: #dbe2ef;
 }
 
 * { box-sizing: border-box; }
@@ -14,9 +14,7 @@ body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color: var(--text);
-  background: radial-gradient(1200px 800px at 10% -10%, #1b244a 0%, transparent 50%),
-              radial-gradient(1000px 700px at 110% 10%, #1f2a54 0%, transparent 50%),
-              var(--bg);
+  background: var(--bg);
 }
 
 .container {
@@ -38,12 +36,11 @@ h1 {
 header p { color: var(--muted); margin: 0; }
 
 .card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--card);
+  border: 1px solid #e5e7eb;
   border-radius: 14px;
   padding: 18px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
 }
 
 .grid {
@@ -58,9 +55,9 @@ header p { color: var(--muted); margin: 0; }
 
 .field {
   padding: 12px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid #e5e7eb;
   border-radius: 10px;
-  background: rgba(6,12,32,0.35);
+  background: #fff;
 }
 
 label { display: block; font-weight: 600; margin-bottom: 6px; }
@@ -88,12 +85,12 @@ input[type="range"]::-webkit-slider-thumb {
   width: 18px; height: 18px;
   border-radius: 50%;
   background: #fff;
-  border: 2px solid #1b3d8a;
+  border: 2px solid #93c5fd;
   margin-top: -6px;
 }
 input[type="range"]::-moz-range-thumb {
   width: 18px; height: 18px; border-radius: 50%;
-  background: #fff; border: 2px solid #1b3d8a;
+  background: #fff; border: 2px solid #93c5fd;
 }
 
 .value {
@@ -113,19 +110,19 @@ button {
   cursor: pointer;
   padding: 10px 14px;
   border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.06);
+  border: 1px solid #e5e7eb;
+  background: #fff;
   color: var(--text);
 }
 
 button.primary {
   border-color: transparent;
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  color: #0a122a;
+  color: #ffffff;
   font-weight: 600;
 }
 
-button.ghost:hover { background: rgba(255,255,255,0.12); }
+button.ghost:hover { background: #f3f4f6; }
 
 .chart-card {
   margin-top: 18px;
@@ -133,7 +130,7 @@ button.ghost:hover { background: rgba(255,255,255,0.12); }
 }
 
 .actions .ghost#download-png,
-.actions .ghost#download-pdf { background: rgba(255,255,255,0.08); }
+.actions .ghost#download-pdf { background: #fff; }
 
 footer { text-align: center; color: var(--muted); margin-top: 22px; }
 footer a { color: var(--accent); text-decoration: none; }
@@ -150,8 +147,8 @@ footer a:hover { text-decoration: underline; }
 
 .scale-btn {
   appearance: none;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.06);
+  border: 1px solid #e5e7eb;
+  background: #fff;
   color: var(--text);
   border-radius: 8px;
   padding: 10px 0;
@@ -159,7 +156,7 @@ footer a:hover { text-decoration: underline; }
   cursor: pointer;
 }
 .scale-btn[aria-checked="true"],
-.scale-btn:hover { border-color: transparent; background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #0a122a; font-weight: 600; }
+.scale-btn:hover { border-color: transparent; background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #ffffff; font-weight: 600; }
 
 .wizard-actions { display: flex; align-items: center; margin-top: 16px; }
 .wizard-actions .spacer { flex: 1; }
