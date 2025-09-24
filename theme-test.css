@@ -38,7 +38,7 @@
 :root[data-theme="bold"] .card {
   background: #ffffff;
   border: 2px solid var(--primary);
-  box-shadow: 0 10px 30px rgba(255, 202, 58, 0.15);
+  box-shadow: none;
 }
 
 :root[data-theme="bold"] .subtitle,
@@ -106,7 +106,14 @@
   padding: 10px 14px;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 6px 24px rgba(255, 202, 58, 0.25);
+  box-shadow: none;
+}
+
+/* Remove shadows across common elements in theme */
+:root[data-theme="bold"] .field,
+:root[data-theme="bold"] button,
+:root[data-theme="bold"] .scale-btn {
+  box-shadow: none;
 }
 
 /* Ensure default/ghost buttons show yellow border in theme */
