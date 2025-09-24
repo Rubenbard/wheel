@@ -29,6 +29,7 @@
   color: var(--text);
   font-weight: 900;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 /* Container and cards */
