@@ -204,7 +204,7 @@ function renderChart(labels, values) {
         }
       },
       plugins: {
-        legend: { labels: { color: '#ecf0ff' } },
+        legend: { labels: { color: '#400d01' } },
         tooltip: {
           callbacks: {
             label: (ctx) => `${ctx.label}: ${ctx.formattedValue}`
