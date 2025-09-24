@@ -192,7 +192,8 @@ function renderChart(labels, values) {
           max: 10,
           ticks: {
             stepSize: 2,
-            color: '#fff'
+            color: '#fff',
+            showLabelBackdrop: false
           },
           pointLabels: {
             color: '#400d01',
