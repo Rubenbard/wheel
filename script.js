@@ -177,7 +177,7 @@ function renderChart(labels, values) {
           fill: true,
           backgroundColor: 'rgba(110, 168, 254, 0.25)',
           borderColor: 'rgba(110, 168, 254, 1)',
-          pointBackgroundColor: categoryColors,
+          pointBackgroundColor: '#ffffff',
           pointBorderColor: 'rgba(0, 0, 0, 0.2)',
           pointHoverBackgroundColor: '#0a122a',
           pointHoverBorderColor: 'rgba(255, 255, 255, 0.8)'
