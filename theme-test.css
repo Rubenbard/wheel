@@ -1,0 +1,110 @@
+/* Bold Black/Yellow test theme (reversible)
+   Activation: add data-theme="bold" on <html> (handled by theme.js)
+   Palette: Black #000000, Yellow #ffca3a, White #ffffff
+*/
+
+:root[data-theme="bold"] {
+  --bg: #000000;
+  --surface: #0b0b0b;
+  --surface-2: #121212;
+  --text: #ffffff;
+  --muted: #c7c7c7;
+  --primary: #ffca3a;
+  --primary-contrast: #000000;
+  --ring: rgba(255, 202, 58, 0.4);
+}
+
+/* Base */
+:root[data-theme="bold"] body {
+  background: var(--bg);
+  color: var(--text);
+  font-weight: 600;
+}
+
+:root[data-theme="bold"] h1,
+:root[data-theme="bold"] h2,
+:root[data-theme="bold"] h3 {
+  color: var(--text);
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+/* Container and cards */
+:root[data-theme="bold"] .container { max-width: 980px; }
+
+:root[data-theme="bold"] .card {
+  background: var(--surface);
+  border: 2px solid var(--primary);
+  box-shadow: 0 10px 30px rgba(255, 202, 58, 0.15);
+}
+
+:root[data-theme="bold"] .subtitle,
+:root[data-theme="bold"] .muted,
+:root[data-theme="bold"] footer p { color: var(--muted); }
+
+/* Buttons */
+:root[data-theme="bold"] .primary {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  font-weight: 800;
+  border: 2px solid var(--primary);
+}
+:root[data-theme="bold"] .primary:hover {
+  filter: brightness(1.05);
+}
+
+:root[data-theme="bold"] .ghost {
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+:root[data-theme="bold"] .ghost:hover {
+  background: rgba(255, 202, 58, 0.08);
+}
+
+/* Inputs */
+:root[data-theme="bold"] input[type="email"],
+:root[data-theme="bold"] input[type="text"],
+:root[data-theme="bold"] input[type="number"] {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 2px solid var(--primary);
+}
+
+/* Scale buttons */
+:root[data-theme="bold"] .scale-btn {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 2px solid var(--primary);
+}
+:root[data-theme="bold"] .scale-btn[aria-checked="true"] {
+  background: var(--primary);
+  color: var(--primary-contrast);
+}
+
+/* Chart.js accent suggestions (wheel rendered on canvas) */
+/* Legend color controlled in script.js; this styles surrounding area */
+:root[data-theme="bold"] .chart-card {
+  background: var(--surface);
+  border: 2px solid var(--primary);
+}
+
+/* Minimal link emphasis */
+:root[data-theme="bold"] a { color: var(--primary); font-weight: 800; }
+
+/* Floating test toggle (injected by theme.js) */
+#theme-toggle {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(255, 202, 58, 0.25);
+}
+
+
