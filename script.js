@@ -309,7 +309,30 @@ async function sendToCoach() {
   const labels = categories.map((c) => c.label);
   const values = wizardState.values.slice();
   if (values.some((v) => v == null)) { alert('Please complete all steps first.'); return; }
-  const chartBase64 = chartInstance ? chartInstance.canvas.toDataURL('image/png') : null;
+  // Build a PDF client-side for upload
+  const { jsPDF } = window.jspdf || {};
+  if (!jsPDF) { alert('PDF generator not loaded'); return; }
+  const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const margin = 36;
+  const imgData = chartInstance ? chartInstance.canvas.toDataURL('image/png') : null;
+  const imgWidth = pageWidth - margin * 2;
+  const imgHeight = imgWidth;
+  pdf.setFont('helvetica', 'bold');
+  pdf.setFontSize(16);
+  pdf.text('Wheel of Life Results', margin, margin);
+  if (imgData) {
+    pdf.addImage(imgData, 'PNG', margin, margin + 10, imgWidth, imgHeight);
+  }
+  pdf.setFont('helvetica', 'normal');
+  pdf.setFontSize(12);
+  const startY = margin + imgHeight + 28;
+  let y = startY;
+  for (let i = 0; i < labels.length; i += 1) {
+    pdf.text(`${labels[i]}: ${values[i]}`, margin, y);
+    y += 18;
+  }
+  const pdfBlob = pdf.output('blob');
   try {
     const supabaseUrl = 'https://dspekkajcbdwpylneqgq.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzcGVra2FqY2Jkd3B5bG5lcWdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg2MjY3NzUsImV4cCI6MjA3NDIwMjc3NX0.W0wkI0ZJfTD94cL2s282AbK3AVXbAfMe4yIG6xpaTck';
@@ -317,11 +340,12 @@ async function sendToCoach() {
 
     // Ensure storage bucket exists (one-time in dashboard ideally). We'll assume `charts` exists.
     let chartUrl = null;
-    if (chartBase64) {
+    if (pdfBlob) {
+      const path = `charts/${Date.now()}.pdf`;
       const { data: uploadData, error: uploadError } = await supabase.storage.from('charts').upload(
-        `charts/${Date.now()}.png`,
-        chartBase64.split(',')[1],
-        { contentType: 'image/png', upsert: true }
+        path,
+        pdfBlob,
+        { contentType: 'application/pdf', upsert: true }
       );
       if (uploadError) throw uploadError;
       const { data: publicUrl } = supabase.storage.from('charts').getPublicUrl(uploadData.path);
@@ -336,7 +360,7 @@ async function sendToCoach() {
       chart_url: chartUrl
     });
     if (insertError) throw insertError;
-    alert('Saved to Supabase');
+    alert('Saved to Supabase (PDF)');
   } catch (e) {
     console.error(e);
     alert('Could not save to Supabase. Please check configuration.');
