@@ -21,6 +21,27 @@
       link.setAttribute('data-theme-test', '');
       document.head.appendChild(link);
     }
+    // Inject Jost from Google Fonts once
+    if (!document.querySelector('link[data-theme-font-jost]')) {
+      const pre1 = document.createElement('link');
+      pre1.rel = 'preconnect';
+      pre1.href = 'https://fonts.googleapis.com';
+      pre1.setAttribute('data-theme-font-jost', '');
+      document.head.appendChild(pre1);
+
+      const pre2 = document.createElement('link');
+      pre2.rel = 'preconnect';
+      pre2.href = 'https://fonts.gstatic.com';
+      pre2.crossOrigin = '';
+      pre2.setAttribute('data-theme-font-jost', '');
+      document.head.appendChild(pre2);
+
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://fonts.googleapis.com/css2?family=Jost:wght@400;600;800;900&display=swap';
+      link.setAttribute('data-theme-font-jost', '');
+      document.head.appendChild(link);
+    }
   }
 
   function initToggle() {
