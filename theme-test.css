@@ -4,10 +4,10 @@
 */
 
 :root[data-theme="bold"] {
-  --bg: #000000;
+  --bg: #ffffff;
   --surface: #0b0b0b;
   --surface-2: #121212;
-  --text: #ffffff;
+  --text: #000000;
   --muted: #c7c7c7;
   --primary: #ffca3a;
   --primary-contrast: #000000;
@@ -36,7 +36,7 @@
 :root[data-theme="bold"] .container { max-width: 980px; }
 
 :root[data-theme="bold"] .card {
-  background: var(--surface);
+  background: #ffffff;
   border: 2px solid var(--primary);
   box-shadow: 0 10px 30px rgba(255, 202, 58, 0.15);
 }
@@ -74,19 +74,19 @@
 
 /* Scale buttons */
 :root[data-theme="bold"] .scale-btn {
-  background: var(--surface-2);
+  background: #ffffff;
   color: var(--text);
   border: 2px solid var(--primary);
 }
 :root[data-theme="bold"] .scale-btn[aria-checked="true"] {
   background: var(--primary);
-  color: var(--primary-contrast);
+  color: #000000;
 }
 
 /* Chart.js accent suggestions (wheel rendered on canvas) */
 /* Legend color controlled in script.js; this styles surrounding area */
 :root[data-theme="bold"] .chart-card {
-  background: var(--surface);
+  background: #ffffff;
   border: 2px solid var(--primary);
 }
 
