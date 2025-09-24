@@ -51,14 +51,14 @@ const wizardState = {
 
 // Per-category colors
 const categoryColors = [
-  '#6EA8FE', // Work & career
-  '#F59E0B', // Finances
-  '#10B981', // Health
-  '#EC4899', // Family & friends
-  '#8B5CF6', // Love & romance
-  '#06B6D4', // Personal growth & development
-  '#F43F5E', // Relaxation & fun
-  '#A3E635'  // Social contribution
+  '#274001', // Work & career
+  '#828a00', // Finances
+  '#f29f05', // Health
+  '#f25c05', // Family & friends
+  '#d6568c', // Love & romance
+  '#4d8584', // Personal growth & development
+  '#a62f03', // Relaxation & fun
+  '#400d01'  // Social contribution
 ];
 
 const stepNumEl = document.getElementById('step-num');
@@ -134,7 +134,7 @@ function renderChart(labels, values) {
   // Plugin to paint colored sectors for each category
   const sectorPlugin = {
     id: 'categorySectors',
-    beforeDatasetsDraw(chart) {
+    beforeDraw(chart) {
       const { ctx, chartArea } = chart;
       const rScale = chart.scales.r;
       if (!rScale) return;
@@ -150,7 +150,7 @@ function renderChart(labels, values) {
         ctx.arc(centerX, centerY, radius, start, end);
         ctx.closePath();
         const color = categoryColors[i % categoryColors.length];
-        ctx.fillStyle = hexToRgba(color, 0.12);
+        ctx.fillStyle = hexToRgba(color, 0.9);
         ctx.fill();
       }
       ctx.restore();
@@ -192,10 +192,10 @@ function renderChart(labels, values) {
           max: 10,
           ticks: {
             stepSize: 2,
-            color: '#9aa3c7'
+            color: '#fff'
           },
           pointLabels: {
-            color: '#ecf0ff',
+            color: '#400d01',
             font: { weight: '600' }
           },
           grid: { color: 'rgba(255,255,255,0.15)' },
