@@ -166,6 +166,7 @@ function renderChart(labels, values) {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
+  const isBoldTheme = document.documentElement.getAttribute('data-theme') === 'bold';
   chartInstance = new Chart(ctx, {
     type: 'radar',
     data: {
@@ -196,7 +197,7 @@ function renderChart(labels, values) {
             showLabelBackdrop: false
           },
           pointLabels: {
-            color: '#400d01',
+            color: isBoldTheme ? '#ffffff' : '#400d01',
             font: { weight: '600' }
           },
           grid: { color: 'rgba(255,255,255,0.15)' },

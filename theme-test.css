@@ -55,7 +55,6 @@
 
 :root[data-theme="bold"] .ghost {
   color: var(--primary);
-  border: 2px solid var(--primary);
 }
 :root[data-theme="bold"] .ghost:hover {
   background: rgba(255, 202, 58, 0.08);
@@ -105,6 +104,11 @@
   font-weight: 800;
   cursor: pointer;
   box-shadow: 0 6px 24px rgba(255, 202, 58, 0.25);
+}
+
+/* Ensure default/ghost buttons show yellow border in theme */
+:root[data-theme="bold"] button:not(.primary) {
+  border: 2px solid var(--primary);
 }
 
 
