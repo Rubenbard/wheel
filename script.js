@@ -340,15 +340,14 @@ async function sendToCoach() {
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzcGVra2FqY2Jkd3B5bG5lcWdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg2MjY3NzUsImV4cCI6MjA3NDIwMjc3NX0.W0wkI0ZJfTD94cL2s282AbK3AVXbAfMe4yIG6xpaTck';
     const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-    // Ensure storage bucket exists (one-time in dashboard ideally). We'll assume `charts` exists.
+    // Upload PDF to storage bucket `charts`
     let chartUrl = null;
     if (pdfBlob) {
-      const path = `charts/${Date.now()}.pdf`;
-      const { data: uploadData, error: uploadError } = await supabase.storage.from('charts').upload(
-        path,
-        pdfBlob,
-        { contentType: 'application/pdf', upsert: true }
-      );
+      const path = `wheel/${Date.now()}.pdf`;
+      const { data: uploadData, error: uploadError } = await supabase
+        .storage
+        .from('charts')
+        .upload(path, pdfBlob, { contentType: 'application/pdf', upsert: false });
       if (uploadError) throw uploadError;
       const { data: publicUrl } = supabase.storage.from('charts').getPublicUrl(uploadData.path);
       chartUrl = publicUrl.publicUrl;
@@ -365,7 +364,7 @@ async function sendToCoach() {
     alert('Saved to Supabase (PDF)');
   } catch (e) {
     console.error(e);
-    alert('Could not save to Supabase. Please check configuration.');
+    alert(`Could not save to Supabase: ${e.message || e.error || e}`);
   }
 }
 if (sendBtn) sendBtn.addEventListener('click', sendToCoach);
